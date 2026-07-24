@@ -97,7 +97,7 @@
       font-size: 13px; color: var(--muted-2);
     }
     .term .in { color: var(--green); }
-    .term .out { color: var(--text); }
+    .term .out { color: var(--text); white-space: pre-wrap; }
     .term .hint { color: var(--warn); }
     #term-out { max-height: 220px; overflow-y: auto; scrollbar-color: var(--border-2) var(--bg-2); scrollbar-width: thin; }
     #term-out::-webkit-scrollbar { width: 6px; }
@@ -275,7 +275,7 @@
       cowsay: () => {
         return lines([
           ' ________________________',
-          '< 罐頭還有，但我不想吃 >',
+          '&lt; 罐頭還有，但我不想吃 &gt;',
           ' ------------------------',
           '        \\   ^__^',
           '         \\  (oo)\\_______',
