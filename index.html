@@ -99,8 +99,9 @@
     .term .in { color: var(--green); }
     .term .out { color: var(--text); }
     .term .hint { color: var(--warn); }
-    .term-input { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
-    .term-input span { color: var(--green); }
+    #term-out { max-height: 220px; overflow-y: auto; }
+    .term-input { display: flex; align-items: center; gap: 8px; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); }
+    .term-input span { color: var(--green); white-space: nowrap; }
     .term-input input {
       flex: 1; background: transparent; border: none; outline: none;
       color: var(--text); font: inherit; caret-color: var(--green);
@@ -237,12 +238,11 @@
     <h2>// 終端機</h2>
     <p class="dim">試試打 <span class="cmd">help</span>。或者按 Konami Code（↑↑↓↓←→←→BA）。</p>
     <div class="term" id="term">
-      <div><span class="in">ciri@box:~$</span> <span class="hint">輸入指令…</span></div>
+      <div id="term-out"></div>
       <div class="term-input">
-        <span class="in">$</span>
+        <span class="in">ciri@box:~$</span>
         <input id="term-in" autocomplete="off" spellcheck="false" placeholder="help / whoami / ls / pwd / clear" />
       </div>
-      <div id="term-out"></div>
     </div>
 
     <div class="secret" id="secret">
@@ -311,6 +311,7 @@
       const fn = handlers[cmd] || ((c) => handlers.default(c));
       const out = cmd === 'clear' ? handlers.clear() : handlers[cmd] || handlers.default(cmd);
       if (out) outEl.insertAdjacentHTML('beforeend', out);
+      outEl.scrollTop = outEl.scrollHeight;
     });
     inEl.focus();
 
